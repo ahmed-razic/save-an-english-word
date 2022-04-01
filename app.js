@@ -94,10 +94,35 @@ function storeWords(engWord, bosWord) {
   localStorage.setItem('words', JSON.stringify(words));
 }
 
-function removeWords() {}
+function removeWords(e) {
+  if (e.target.classList.contains('fa')) {
+    if (confirm('Are you sure?')) {
+      e.target.parentElement.parentElement.remove();
+
+      removeFromLocalStorage(e.target.parentElement.parentElement);
+    }
+  }
+}
+
+function removeFromLocalStorage(listItem) {
+  let words;
+
+  if (localStorage.getItem('words') === null) {
+    words = [];
+  } else {
+    words = JSON.parse(localStorage.getItem('words'));
+  }
+
+  words.forEach((item, index) => {
+    if (listItem.childNodes[1].textContent === item) {
+      words.splice(index, 2);
+    }
+  });
+
+  localStorage.setItem('words', JSON.stringify(words));
+}
 
 function filterWords(e) {
-  console.log(e.type);
   const filterText = e.target.value.toLowerCase();
 
   document.querySelectorAll('li').forEach((item) => {
@@ -117,8 +142,3 @@ function clearAllWords() {
 
   localStorage.clear();
 }
-
-/* 
-
-localStorage.setItem('bosnian', JSON.stringify(bosnian));
-localStorage.setItem('english', JSON.stringify(english)); */
