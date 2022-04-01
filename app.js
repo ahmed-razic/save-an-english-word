@@ -1,3 +1,5 @@
+//small app for storing english words and bosnian translation
+
 const formInput = document.querySelector('#input-form');
 const engInput = document.querySelector('#eng-input');
 const bosInput = document.querySelector('#bos-input');
