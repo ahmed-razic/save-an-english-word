@@ -8,7 +8,7 @@ const wordsList = document.querySelector('#words-list');
 loadEventListeners();
 
 function loadEventListeners() {
-  document.addEventListener('DOMContentLoad', getAllWords);
+  document.addEventListener('DOMContentLoaded', getAllWords);
   formInput.addEventListener('submit', addWords);
   wordsList.addEventListener('click', removeWords);
   clearBtn.addEventListener('click', clearAllWords);
@@ -96,7 +96,19 @@ function storeWords(engWord, bosWord) {
 
 function removeWords() {}
 
-function filterWords() {}
+function filterWords(e) {
+  console.log(e.type);
+  const filterText = e.target.value.toLowerCase();
+
+  document.querySelectorAll('li').forEach((item) => {
+    const wordText = item.childNodes[1].innerText.toLowerCase();
+    if (wordText.indexOf(filterText) !== -1) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
 
 function clearAllWords() {
   while (wordsList.firstChild) {
